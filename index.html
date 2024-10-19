@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voleybol Blog</title>
+    <style>
+        /* Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+        /* Genel stil ayarları */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #1f1f2f;
+            font-family: 'Poppins', sans-serif;
+            color: #f0f0f0;
+            line-height: 1.6;
+        }
+
+        /* Header ve navigasyon */
+        header {
+            background-color: #282c34;
+            color: #61dafb;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 15px;
+        }
+
+        nav a {
+            color: #61dafb;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        nav a:hover {
+            border-bottom: 2px solid #61dafb;
+        }
+
+        /* Ana içerik */
+        main {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #282c34;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        section {
+            margin-bottom: 40px;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #3c3f52;
+        }
+
+        h2 {
+            color: #61dafb;
+            margin-bottom: 15px;
+            font-weight: 600;
+            font-size: 1.8rem;
+        }
+
+        p, ul {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+
+        /* Anket tasarımı */
+        .poll {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .poll h3 {
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #61dafb;
+        }
+
+        .poll button {
+            margin: 10px;
+            padding: 10px 20px;
+            background-color: #61dafb;
+            color: #282c34;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .poll button:hover {
+            background-color: #3db2e8;
+        }
+
+        /* Hakkımda ve İletişim */
+        .contact, .about {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact a, .about a {
+            color: #61dafb;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 15px;
+            background-color: #282c34;
+            color: #f0f0f0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        footer a {
+            color: #61dafb;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Pop-up stil */
+        .popup {
+            display: none;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        .popup button {
+            background-color: #61dafb;
+            color: #282c34;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .popup button:hover {
+            background-color: #3db2e8;
+        }
+    </style>
+    <script>
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                section.style.display = 'none'; // Tüm bölümleri gizle
+            });
+            document.getElementById(sectionId).style.display = 'block'; // Seçilen bölümü göster
+        }
+
+        function showPopup() {
+            document.getElementById('welcomePopup').style.display = 'block'; // Pop-up göster
+        }
+
+        function closePopup() {
+            document.getElementById('welcomePopup').style.display = 'none'; // Pop-up gizle
+        }
+
+        window.onload = function() {
+            showPopup(); // Sayfa yüklendiğinde pop-up göster
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Voleybol Blog</h1>
+        <nav>
+            <ul>
+                <li><a href="javascript:void(0);" onclick="showSection('blog')">Blog</a></li>
+                <li><a href="javascript:void(0);" onclick="showSection('hakkimda')">Hakkımda</a></li>
+                <li><a href="javascript:void(0);" onclick="showSection('iletisim')">İletişim</a></li>
+                <li><a href="javascript:void(0);" onclick="showSection('anket')">Anket</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="blog">
+            <h2>Voleybolun Ülkemizdeki Yeri</h2>
+            <p>Voleybol, Türkiye’deki spor tutkusunun en heyecan verici parçalarından biri! Hem kadın hem de erkek takımlarımızın uluslararası arenada kazandığı başarılar, hepimizi gururlandırıyor ve voleybola olan ilgiyi artırıyor. Tribünlerdeki coşku, takım arkadaşlığı ve her maçtaki mücadele ruhu, bu sporu daha da özel kılıyor
+                Kısacası, voleybol Türkiye’de bir tutku, bir yaşam tarzı! O anı paylaşmak, bir takımın parçası olmak ve o heyecanı yaşamak, bu sporu daha da büyüleyici kılıyor. Her pas, her smaç ve her puan için kalbimiz atıyor!
+            </p>
+            <h2>Voleybolda Kazandığımız Başarılar</h2>
+            <ul>
+                <li>Kadın Voleybol Takımı: 2012 Londra Olimpiyatları'nda yarı finale çıkarak tarihi bir başarıya imza attılar. Ayrıca, 2016 Rio Olimpiyatları'nda da mücadele ettiler..</li>
+                <li>FIVB Dünya Şampiyonası: Kadın millî takım, 2014'te İtalya’da düzenlenen şampiyonada bronz madalya kazanarak, tarihindeki en büyük başarılardan birini elde etti.</li>
+                <li>Avrupa Şampiyonası: 2019'da kadın millî takım, Avrupa Şampiyonası’nda gümüş madalya kazanarak önemli bir başarıya daha imza attı. Erkek millî takım da 2021'de Avrupa Şampiyonası'nda dördüncülük elde etti.</li>
+                <li>Kulüpler Düzeyinde: Türk takımları, özellikle Eczacıbaşı, VakıfBank ve Fenerbahçe, CEV Şampiyonlar Ligi gibi uluslararası turnuvalarda birçok kez şampiyonluk yaşamıştır. VakıfBank, 2017'de Şampiyonlar Ligi'ni kazanarak büyük bir başarı elde etti.</li>
+                <li>Genç Takımlar: Türkiye, genç yaş gruplarında da önemli başarılar kazanarak, voleybolun geleceğini güvence altına alıyor. Genç kadın ve erkek takımları, Avrupa Şampiyonası’nda dereceler elde etti.</li>
+            </ul>
+        </section>
+
+        <section id="anket" style="display: none;">
+            <h2>Anket</h2>
+            <div class="poll">
+                <h3>Voleybol Karşılaştırma Anketi</h3>
+                <p>Favori voleybolcunuz kim?</p>
+                <button onclick="alert('Teşekkürler!')">Hande</button>
+                <button onclick="alert('Teşekkürler!')">Vargas</button>
+
+                <p>Hangi voleybolcu daha iyi smaçör?</p>
+                <button onclick="alert('Teşekkürler!')">Ebrar</button>
+                <button onclick="alert('Teşekkürler!')">Selin</button>
+
+                <p>Hangi voleybolcu daha iyi savunma oyuncusu?</p>
+                <button onclick="alert('Teşekkürler!')">Beyza</button>
+                <button onclick="alert('Teşekkürler!')">Selin</button>
+
+                <p>Hangi voleybolcu daha iyi servis atar?</p>
+                <button onclick="alert('Teşekkürler!')">Gizem</button>
+                <button onclick="alert('Teşekkürler!')">Beyza</button>
+
+                <p>Hangi voleybolcu daha fazla takım ruhuna sahiptir?</p>
+                <button onclick="alert('Teşekkürler!')">Ayla</button>
+                <button onclick="alert('Teşekkürler!')">Selin</button>
+            </div>
+        </section>
+
+        <section id="hakkimda" style="display: none;">
+            <h2>Hakkımda</h2>
+            <p>Ben voleybol sever bir spor tutkunu ve bu blogda voleybol hakkında size bilgi vereceğim.Ben 5 yıldır voleybol ile uğraşan üniversite voleybol takımında oynamış üniversitemi temsil eden bir öğrencinizim 
+             voleybol hayatımızdaki stresi uzaklaştırır ve eğlencemizi yerine getirir hem daha sağlıklı olmamızı hem de arkadaşlarımız ile güzel vakit geçirmemize olanak tanır 
+             aynı zamanda voleybol kadınlar liginde üst sıralarda bulunan oyuncularımızdan dolayı çok popüler olan voleybol hakkında size şu bilgileri vereceğim
+             Amacım voleybolun tarihini, kurallarını ve oyuncularını tanıtmak ve voleybola olan ilgiyi artırmaktır.</p>
+        </section>
+
+        <section id="iletisim" style="display: none;">
+            <h2>İletişim</h2>
+            <div class="contact">
+                <p>Bana ulaşmak için:</p>
+                <a href="mailto:timurelmas49@gmail.com">E-posta: timurelmas49@gmail.com </a>
+                <a href="https://instagram.com/timurelmas" target="_blank">Instagram:timurelmas </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Bu blog <a href="mailto:timurelmas49@gmail.com">proje</a> amaçlı hazırlanmıştır.</p>
+    </footer>
+
+    <div class="popup" id="welcomePopup">
+        <h2>Hoş Geldiniz!</h2>
+        <p>Voleybol tanıtımıma hoş geldiniz! Burada voleybol hakkında birçok bilgi ve içerik hakkında bahsedeceğim.</p>
+        <button onclick="closePopup()">Tamam</button>
+    </div>
+</body>
+</html>
